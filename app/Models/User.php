@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -42,4 +44,24 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function wordProgress(): HasMany
+    {
+        return $this->hasMany(UserWordProgress::class);
+    }
+
+    public function reviewLogs(): HasMany
+    {
+        return $this->hasMany(ReviewLog::class);
+    }
+
+    public function notificationDeliveries(): HasMany
+    {
+        return $this->hasMany(NotificationDelivery::class);
+    }
+    
+    public function devices(): HasMany
+    {
+        return $this->hasMany(UserDevice::class);
+    }
 }

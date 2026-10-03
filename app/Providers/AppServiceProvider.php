@@ -4,6 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
+use App\Services\ExpoPushNotificationProvider;
+use App\Services\PushNotificationProvider;
+
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -11,7 +14,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind(
+            PushNotificationProvider::class,
+            ExpoPushNotificationProvider::class
+        );
     }
 
     /**

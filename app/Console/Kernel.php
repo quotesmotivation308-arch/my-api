@@ -12,7 +12,17 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->command('notifications:create-due')
+            ->everyMinute();
+
+        $schedule->command('notifications:create-attempts')
+            ->everyMinute();
+
+        $schedule->command('notifications:retry-attempts')
+            ->everyMinute();
+
+        $schedule->command('notifications:send-attempts')
+            ->everyMinute();
     }
 
     /**
